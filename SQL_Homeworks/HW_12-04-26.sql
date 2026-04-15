@@ -51,7 +51,7 @@ SET GRADE = 90
 WHERE name = 'Liam';
 -- Delete all students where city starts with "N"
 DELETE FROM STUDENTS
-WHERE CITY GLOB 'N%';
+WHERE CITY GLOB 'N*';
 -- Delete all students with grade 88
 DELETE FROM STUDENTS
 WHERE GRADE = 88;
