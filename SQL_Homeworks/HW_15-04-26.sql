@@ -3,10 +3,10 @@ CREATE TABLE workshop_roster(
 	roster_id INTEGER PRIMARY KEY NOT NULL,
 	contact_email TEXT UNIQUE,
 	display_name TEXT NOT NULL,
-	wants_certificate BOOLEAN NOT NULL DEFAULT 0,
+	wants_certificate BOOLEAN NOT NULL DEFAULT FALSE,
 	start_date DATE NOT NULL,
 	last_activity  DATETIME NOT NULL,
-	completion_score REAL CHECK (completion_score => 0 AND completion_score <= 100),
+	completion_score REAL CHECK (completion_score BETWEEN 0 AND 100),
 	group_label  TEXT DEFAULT 'starter'
 );
 
@@ -75,8 +75,8 @@ VALUES (6 ,'mika@campus.com' ,	'Mika',	0 ,	'2026-04-01' , '2026-04-14 08:15:00' 
 INSERT INTO workshop_roster (roster_id, contact_email, display_name,wants_certificate, start_date, last_activity,completion_score)
 VALUES (7 ,'ameed@campus.com' ,	'Ameed',	1 ,	'2026-04-01' , '2026-04-14 08:15:00' , 120);
 
--- error: completion_score must be >= 0 AND <= 100
---Result: CHECK constraint failed: completion_score >= 0 AND completion_score <= 100
+-- error: completion_score must be between 0 AND 100.
+--Result: CHECK constraint failed: completion_score BETWEEN 0 AND 100
 
 
 
