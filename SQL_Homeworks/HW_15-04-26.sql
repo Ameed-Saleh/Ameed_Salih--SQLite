@@ -65,7 +65,7 @@ WHERE completion_score < 85;
 
 --4 -> Try one insert with duplicate contact_email and explain which constraint blocks it
 INSERT INTO workshop_roster (roster_id, contact_email, display_name,wants_certificate, start_date, last_activity,completion_score, group_label)
-VALUES (6 ,'mika@campus.com' ,	'Mika',	0 ,	'2026-04-01' , '2026-04-14 08:15:00' , 70, 'regular');
+VALUES (6 ,'mika@campus.com' ,	'Mika',	0 ,	'2026-04-01' , '2026-04-14 08:15:00' , 70.0, 'regular');
 
 -- error: duplicate email (UNIQUE)
 --Execution finished with errors.
@@ -73,7 +73,7 @@ VALUES (6 ,'mika@campus.com' ,	'Mika',	0 ,	'2026-04-01' , '2026-04-14 08:15:00' 
 
 --5 -> Try one insert with completion_score = 120 and explain which constraint blocks it
  INSERT INTO workshop_roster (roster_id, contact_email, display_name,wants_certificate, start_date, last_activity,completion_score)
- VALUES (7 ,'ameed@campus.com' ,	'Ameed',	1 ,	'2026-04-01' , '2026-04-14 08:15:00' , 120 );
+ VALUES (7 ,'ameed@campus.com' ,	'Ameed',	1 ,	'2026-04-01' , '2026-04-14 08:15:00' , 120.0 );
 
 -- error: completion_score must be between 0 AND 100.
 --Result: CHECK constraint failed: completion_score BETWEEN 0 AND 100
