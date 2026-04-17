@@ -50,8 +50,8 @@ WHERE wants_certificate = FALSE
 --3.4 ->  show rows where display_name and contact_email both start with m (use LIKE)
 SELECT *
 FROM workshop_roster
-WHERE display_name like 'm%'
-	AND contact_email like 'm%';
+WHERE display_name LIKE 'M%'
+	AND contact_email LIKE 'm%';
 --1	mika@campus.com	    Mika	1	2026-04-01	2026-04-14 08:15:00	94.5	advanced
 --2	matan@campus.com	Matan	1	2026-04-05	2026-04-12 18:20:00	82.0	advanced
 
@@ -72,8 +72,7 @@ VALUES (6 ,'mika@campus.com' ,	'Mika',	0 ,	'2026-04-01' , '2026-04-14 08:15:00' 
 --Result: UNIQUE constraint failed: workshop_roster.contact_email
 
 --5 -> Try one insert with completion_score = 120 and explain which constraint blocks it
-INSERT INTO workshop_roster (roster_id, contact_email, display_name,wants_certificate, start_date, last_activity,completion_score)
-VALUES (7 ,'ameed@campus.com' ,	'Ameed',	1 ,	'2026-04-01' , '2026-04-14 08:15:00' , 120);
+INSERT INTO workshop_roster (completion_score) VALUES (120);
 
 -- error: completion_score must be between 0 AND 100.
 --Result: CHECK constraint failed: completion_score BETWEEN 0 AND 100
