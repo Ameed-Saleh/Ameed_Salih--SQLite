@@ -1,5 +1,5 @@
 -- Create a new table called STUDENTS with columns and constraints:
-ID INT PRIMARY KEY, NAME TEXT NOT NULL, AGE, CITY, GRADE REAL NOT NULL.
+--ID INT PRIMARY KEY, NAME TEXT NOT NULL, AGE, CITY, GRADE REAL NOT NULL.
 CREATE TABLE STUDENTS (
 	ID INT PRIMARY KEY ,
 	NAME TEXT NOT NULL,
@@ -35,11 +35,12 @@ WHERE GRADE>90;
 -- select all students where their name starts with M
 SELECT *
 FROM STUDENTS
-WHERE NAME like 'm%';
+WHERE NAME like 'M%';
 --  show the avg grade, max, min
-SELECT avg(grade) as avg_grade FROM STUDENTS;
-SELECT max(grade) as max_grade FROM STUDENTS;
-SELECT min(grade) as min_grade FROM STUDENTS;
+SELECT AVG(grade) AS avg_grade,
+       MAX(grade) AS max_grade,
+       MIN(grade) AS min_grade
+FROM STUDENTS;
 --  show all students who got above avg
 SELECT *
 FROM STUDENTS
