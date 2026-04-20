@@ -37,13 +37,16 @@ ORDER by rating_bucket DESC , movie_name ASC;
 
 
 -- Try a second version without aliases and compare readability
-SELECT * FROM movies
+SELECT id, title, genre, year, rating, minutes
+FROM movies
 ORDER by rating DESC , title ASC;
---2	Quiet Lake	   Drama	2012	8.1	  124
---1	Metro Rush	   Action	2005	7.9	  118
---4	Skyline Code   Action	2021	7.4	  109
---5	Tiny Planet	   Family	2010	7.1	  86
---3	Night Pulse	   Horror	2018	6.8	  95
+--id     title         genre    year     rating   minutes
+
+--2	   Quiet Lake	   Drama	2012	  8.1	    124
+--1	   Metro Rush	   Action	2005	  7.9	    118
+--4	   Skyline Code    Action	2021	  7.4	    109
+--5	   Tiny Planet	   Family	2010	  7.1	    86
+--3    Night Pulse	   Horror	2018	  6.8	    95
 
 
 
@@ -110,33 +113,32 @@ SELECT DISTINCT type
 FROM netflix_movies_detailed_up_to_2025;
 
 --Use DISTINCT to list 20 non-empty cast entries from Action movies
-SELECT DISTINCT title, genres, "cast"
+SELECT DISTINCT "cast"
 FROM netflix_movies_detailed_up_to_2025
 WHERE type = 'Movie'
   AND genres LIKE '%Action%'
   AND "cast" IS NOT NULL
+  AND TRIM("cast") != ''
 LIMIT 20;
 
 
 --Find 5 action movies released after 2015
-SELECT title, genres, release_year
+--Sort by highest rating first
+SELECT title,genres, release_year,rating
 FROM netflix_movies_detailed_up_to_2025
 WHERE type = 'Movie'
   AND genres LIKE '%Action%'
   AND release_year > 2015
-ORDER BY release_year DESC
+ORDER BY release_year DESC, rating DESC
 LIMIT 5;
 
---Sort by highest rating first
-SELECT title, rating
-FROM netflix_movies_detailed_up_to_2025
-ORDER BY rating DESC;
 
 --Alias output columns as movie and score
 SELECT
   title AS movie,
   rating AS score
-FROM  netflix_movies_detailed_up_to_2025;
+FROM  netflix_movies_detailed_up_to_2025
+ORDER by score DESC;
 
 --Bonus: find drama titles where cast is NULL
 SELECT title,genres,"cast"
