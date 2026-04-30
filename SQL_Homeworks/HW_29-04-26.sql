@@ -20,7 +20,7 @@ INSERT INTO sales (id, rep_name, region, product, amount, sale_date) VALUES
   (9,  'Liam', 'West',  'Laptop', 1050.00, '2026-02-01'),
   (10, 'Omar', 'South', 'Tablet', NULL,     '2026-02-03');
 
--- 5- ALTER TABLE:
+-- Topic 5 — ALTER TABLE →
 --1. Add a TEXT column called tier to the sales table, then fill it: 'high' where amount > 1000, 'low' otherwise
 ALTER TABLE sales
 ADD COLUMN tier TEXT;
@@ -62,7 +62,7 @@ PRAGMA table_info(sales);
 --6	tax	        REAL
 
 
--- 6- ADVANCED & MISTAKES:
+-- ⭐ BONUS ⭐ Topic 6 — Advanced & Mistakes →:
 --1. Use COALESCE to show revenue per rep — replace any NULL total with 0
 SELECT
   rep_name,
