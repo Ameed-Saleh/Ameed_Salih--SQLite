@@ -26,17 +26,14 @@ ALTER TABLE sales
 ADD COLUMN tier TEXT;
 
 UPDATE sales
-SET    tier = 'high' WHERE amount > 1000;
-
-UPDATE sales
-SET   tier = 'low' WHERE amount <= 1000;
+SET    tier = CASE WHEN amount > 1000 THEN 'high' ELSE 'low' END;
 
 --2. Add a REAL column called tax with DEFAULT 0, then update it to amount * 0.07 where amount IS NOT NULL
 ALTER TABLE sales
 ADD COLUMN tax REAL DEFAULT 0;
 
 UPDATE sales
-SET    tax = amount * 0.07;
+SET    tax = amount * 0.07 WHERE amount IS NOT NULL;
 
 --3. Rename the sales table to sales_backup, then rename it back to sales
 ALTER TABLE sales RENAME TO sales_backup;
@@ -81,7 +78,7 @@ ORDER BY average_price DESC;
 --3. For each rep show: total sales, count of Phone sales, count of sales above 1000
 SELECT
   rep_name,
-  SUM(amount) AS total_sales,
+  COUNT(*) AS total_sales,
   COUNT(CASE WHEN product = 'Phone' THEN 1 END) AS phone_sales,
   COUNT(CASE WHEN amount > 1000 THEN 1 END) AS sales_above_1000
 FROM sales
