@@ -67,7 +67,7 @@ WHERE f1.origin != f2.destination;
 --LH402	  Amsterdam	  LH401	  Berlin
 
 
--- TOPIC -> Joining 3+ Tables
+-- TOPIC 7 -> Joining 3+ Tables
 CREATE TABLE customers (
   id    INTEGER PRIMARY KEY,
   name  TEXT    NOT NULL,
