@@ -107,8 +107,8 @@ GROUP BY rep_name, product;
 --5. Build the full report from Query 4: COALESCE + ROUND + COUNT(CASE WHEN) + HAVING + ORDER BY alias
 SELECT
   rep_name,
-  COALESCE(SUM(amount), 0) AS revenue,
-  ROUND(AVG(COALESCE(amount, 0)), 2) AS average_price,
+  COALESCE(ROUND(SUM(amount), 2), 0)) AS revenue,
+  COALESCE(ROUND(AVG(amount, 2), 0) AS average_price,
   COUNT(CASE WHEN product = 'Phone' THEN 1 END) AS phone_sales,
   COUNT(CASE WHEN amount > 1000 THEN 1 END) AS sales_above_1000
 FROM sales

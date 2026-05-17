@@ -78,19 +78,19 @@ CREATE TABLE orders (
 );
 
 
---2. Create products: id PK AUTOINCREMENT, name TEXT NOT NULL, unit_price REAL NOT NULL.
+--2. Create products: id PK AUTOINCREMENT, name TEXT NOT NULL, unit_price REAL NOT NULL CHECK (unit_price >= 0).
 CREATE TABLE products (
   id      INTEGER  PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
-  unit_price REAL NOT NULL
+  unit_price REAL NOT NULL CHECK (unit_price >= 0)
 );
 
 
---3. Create sales (junction): order_id FK, product_id FK, qty INTEGER NOT NULL DEFAULT 1, with composite PK (order_id, product_id). (Each row means one product sold in one order.)
+--3. Create sales (junction): order_id FK, product_id FK, qty INTEGER NOT NULL DEFAULT 1 CHECK (qty > 0), with composite PK (order_id, product_id). (Each row means one product sold in one order.)
 CREATE TABLE sales (
   order_id    INTEGER  NOT NULL,
   product_id  INTEGER  NOT NULL,
-  qty INTEGER NOT NULL DEFAULT 1,
+  qty INTEGER NOT NULL DEFAULT 1 CHECK (qty > 0)
   PRIMARY KEY (order_id , product_id),
   FOREIGN KEY (order_id) REFERENCES orders(id) ,
   FOREIGN KEY (product_id)  REFERENCES products(id)
