@@ -53,7 +53,7 @@ for c in answer:
 
 # Query 4 — Add a book from user input
 print()
-title    =     input(f"{PURPLE}Enter book title? {RESET} ")
+title    =     input(f"{PURPLE}Enter book title? {RESET}")
 author_id =     input(f"{PURPLE}Enter author ID? {RESET}")
 year  =     input(f"{PURPLE}Enter publication year? {RESET}")
 
