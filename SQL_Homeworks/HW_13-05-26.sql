@@ -13,20 +13,20 @@
 
 --3. Write CREATE TABLE statements for all four tables.
 CREATE TABLE customers (
-  customer_id  INTEGER  PRIMARY KEY AUTOINCREMENT,
+  id  INTEGER  PRIMARY KEY AUTOINCREMENT,
   customer_name TEXT     NOT NULL
 );
 
 CREATE TABLE products (
-  product_id   INTEGER  PRIMARY KEY,
+  id   INTEGER  PRIMARY KEY,
   product_name TEXT     NOT NULL ,
   unit_price REAL NOT NULL
 );
 
 CREATE TABLE orders (
-  order_id   INTEGER  PRIMARY KEY ,
+  id   INTEGER  PRIMARY KEY ,
   customer_id  INTEGER NOT NULL,
-  FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+  FOREIGN KEY (customer_id) REFERENCES customers(id)
 );
 
 CREATE TABLE order_items(
@@ -34,8 +34,8 @@ CREATE TABLE order_items(
   order_id  INTEGER  NOT NULL,
   qty INTEGER NOT NULL CHECK (qty > 0),
   PRIMARY KEY (order_id , product_id),
-  FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
-  FOREIGN KEY (product_id)  REFERENCES products(product_id )
+  FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+  FOREIGN KEY (product_id)  REFERENCES products(id )
 );
 
 
@@ -45,11 +45,11 @@ INSERT INTO customers (customer_name)
 VALUES ('Alice'),
        ('Bob');
 
-INSERT INTO products (product_id, product_name, unit_price)
+INSERT INTO products (id, product_name, unit_price)
 VALUES (42, 'Keyboard', 49.99),
        (77, 'Mouse', 29.99);
 
-INSERT INTO orders (order_id, customer_id)
+INSERT INTO orders (id, customer_id)
 VALUES (1001, 1),
 	   (1002, 2);
 
@@ -60,23 +60,23 @@ VALUES (1001, 42, 2),
 
 --5. Write a query to reproduce the original table's data using JOINs.
 SELECT
-	O.order_id,
-	p.product_id,
+	O.id As order_id,
+	p.id As product_id,
 	oi.qty,
 	c.customer_name,
 	p.product_name,
 	p.unit_price
 FROM order_items oi
-JOIN orders o on oi.order_id = o.order_id
-JOIN customers c on o.customer_id = c.customer_id
-JOIN products p on oi.product_id = p.product_id
-ORDER by o.order_id ASC;
+JOIN orders o on oi.order_id = o.id
+JOIN customers c on o.customer_id = c.id
+JOIN products p on oi.product_id = p.id
+ORDER by o.id ASC;
 
 
 --6. Bonus: rename "Keyboard" to "Mechanical Keyboard" — in the bad table vs the 2NF table. How many rows changed in each?
 UPDATE products
 SET product_name = 'Mechanical Keyboard'
-WHERE product_id = 42;
+WHERE id = 42;
 
 --"In the 2NF Table we change the word "Mechanical Keyboard" one time,
 --but in the original bad table we had to update two different lines (because the name is duplicated in every order)"
