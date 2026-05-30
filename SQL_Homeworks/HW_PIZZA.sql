@@ -9,7 +9,6 @@ CREATE TABLE customers (
   phone TEXT    NOT NULL
 );
 --------------------------------------------
-"Used RESTRICT to prevent deleting a customer as long as they have existing orders"
 CREATE TABLE orders (
   id      INTEGER  PRIMARY KEY AUTOINCREMENT,
   customer_id INTEGER NOT NULL,
@@ -104,7 +103,7 @@ VALUES (1, 1, 1), (2, 3, 2), (3, 2, 1);
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 -- WHY ON DELETE RESTRICT ?
---1. Customer to Orders (orders 1 -> N customers)
+--1. Customer to Orders (customers 1 -> N orders)
 "Prevents deleting a customer if they have existing order, This ensures data integrity and prevents orders that lack a linked customer."
 
 --2. Items to Orders (pizzas, toppings, drinks)
