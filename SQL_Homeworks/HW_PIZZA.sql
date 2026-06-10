@@ -38,6 +38,7 @@ CREATE TABLE order_pizzas(
   order_id INTEGER  NOT NULL,
   pizza_id  INTEGER  NOT NULL,
   pizza_qty  INTEGER DEFAULT 1,
+  price_at_time REAL NOT NULL,
   PRIMARY KEY (order_id, pizza_id),
   FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
   FOREIGN KEY (pizza_id)  REFERENCES pizzas(id)  ON DELETE RESTRICT
@@ -55,6 +56,7 @@ CREATE TABLE order_drinks(
   order_id INTEGER  NOT NULL,
   drink_id  INTEGER  NOT NULL,
   drink_qty  INTEGER DEFAULT 1,
+  price_at_time REAL NOT NULL,
   PRIMARY KEY (order_id, drink_id),
   FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
   FOREIGN KEY (drink_id)  REFERENCES drinks(id)  ON DELETE RESTRICT
@@ -92,14 +94,14 @@ VALUES ('Coca-Cola', 9.00),
 	   ('Sprite Zero', 9.00),
 	   ('Fanta', 9.00);
 --------------------------------------------
-INSERT INTO order_pizzas(order_id, pizza_id, pizza_qty)
-VALUES (1, 1, 2), (2, 2, 1), (3, 3, 1);
+INSERT INTO order_pizzas(order_id, pizza_id, pizza_qty,  price_at_time)
+VALUES (1, 1, 2, 12.99), (2, 2, 1, 15.55), (3, 3, 1, 10.75);
 --------------------------------------------
 INSERT INTO pizza_toppings(pizza_id, topping_id)
 VALUES (1, 1), (2, 2), (2, 3);
 --------------------------------------------
-INSERT INTO order_drinks(order_id, drink_id, drink_qty)
-VALUES (1, 1, 1), (2, 3, 2), (3, 2, 1);
+INSERT INTO order_drinks(order_id, drink_id, drink_qty,  price_at_time)
+VALUES (1, 1, 1, 7.50), (2, 3, 2, 8.99), (3, 2, 1, 10.82);
 
 """"""""""""""""""""""""""""""""""""""""""""""""""
 -- WHY ON DELETE RESTRICT ?
