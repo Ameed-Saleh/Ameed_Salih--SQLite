@@ -10,7 +10,7 @@ run_update_query("""DROP TABLE IF EXISTS books;""")
 run_update_query("""CREATE TABLE IF NOT EXISTS authors (
     id INTEGER PRIMARY  KEY,
     name TEXT    NOT NULL,
-    country   REAL    NOT NULL)""")
+    country TEXT )""")
 
 run_update_query("""CREATE TABLE IF NOT EXISTS books  (
     id         INTEGER PRIMARY KEY,
@@ -34,21 +34,21 @@ run_update_query("INSERT INTO books (id, title, author_id, year) VALUES (?, ?, ?
 # Query 1 — SELECT all books
 print()
 books = run_query_select("SELECT * FROM books")
-for b in books:
-    print(f"{PURPLE}Query 1 ={RESET} {CYAN}{b}{RESET}")
+for row in books:
+    print(f"{PURPLE}Query 1 ={RESET} {CYAN}{row["title"]}{RESET}")
 
 
 # Query 2 — Books after 1960
 print()
 books = run_query_select("SELECT * FROM books WHERE year > 1960;")
 for y in books:
-    print(f"{PURPLE}Query 2 = {RESET} {CYAN}{y}{RESET}")
+    print(f"{PURPLE}Query 2 = {RESET} {CYAN}{y["title"]}{RESET}")
 
 # Query 3 — INNER JOIN books + authors
 print()
 answer = run_query_select("SELECT b.title, a.name FROM books b INNER JOIN authors a ON b.author_id = a.id;")
 for c in answer:
-    print(f"{PURPLE}Query 3 ={RESET} {CYAN}{c}{RESET}")
+    print(f"{PURPLE}Query 3 ={RESET} {CYAN}{c["title"]} — {c["name"]}{RESET}")
 
 
 # Query 4 — Add a book from user input
