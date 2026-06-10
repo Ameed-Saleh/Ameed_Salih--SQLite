@@ -50,7 +50,6 @@ answer = run_query_select("SELECT b.title, a.name FROM books b INNER JOIN author
 for c in answer:
     print(f"{PURPLE}Query 3 ={RESET} {CYAN}{c["title"]} — {c["name"]}{RESET}")
 
-
 # Query 4 — Add a book from user input
 print()
 title    =     input(f"{PURPLE}Enter book title? {RESET}")
